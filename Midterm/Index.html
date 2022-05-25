@@ -9,7 +9,7 @@
     window.onload = function() {
         AFRAME.registerComponent('event-listener', {
             init: function () {
-                
+                this.audio = document.querySelector("#Alien");
 
                 this.el.addEventListener('click', function (e) {
 		
@@ -62,7 +62,8 @@
   <body style="margin: 0; overflow: hidden;">
     <a-scene renderer="colorManagement: true">
        <a-assets>
-        <a-asset-item id="dk" response-type="arraybuffer" src="./scene.glb"></a-asset-item>  
+        <a-asset-item id="scene" response-type="arraybuffer" src="./scene.glb"></a-asset-item>
+        <audio id="laugh" src="./assets/Alien.wav"></audio>
       </a-assets>
       <a-entity event-listener id="scene-model"  
         gltf-model="#scene" 
@@ -71,6 +72,7 @@
         rotation="0 0 0" 
       >
       </a-entity>
+      <a-sound src="#Alien" autoplay="false"></a-sound>
       <a-entity cursor="rayOrigin:mouse"></a-entity>
       <a-entity cursor="fuse: true; fuseTimeout: 500"></a-entity>
     </a-scene>
