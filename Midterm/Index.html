@@ -1,1 +1,78 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>UI AR Demo</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script>
+    window.onload = function() {
+        AFRAME.registerComponent('event-listener', {
+            init: function () {
+                
 
+                this.el.addEventListener('click', function (e) {
+		
+                    let dk = document.querySelector("#scene-model")
+		    dk.setAttribute("animation-mixer", "clip: IdleAnim; loop: repeat;");
+                    this.audio.play();
+			
+                  console.log(e)
+                }.bind(this));
+		
+                this.el.addEventListener("mouseenter", function (e) {
+                    console.log(e)
+                }.bind(this));
+		    
+		 this.el.addEventListener("mouseleave", function (e) {
+			 console.log(e)
+                }.bind(this));
+		 
+		
+                this.el.addEventListener("touchmove", function (e) {
+                    //this.audio.play();
+			
+                  console.log(e)
+                }.bind(this));
+                this.el.addEventListener("touchstart", function (e) {
+		
+                    let dk = document.querySelector("#scene")
+		    dk.setAttribute("animation-mixer", "clip: IdleAnim; loop:repeat;");
+                    this.audio.play();
+			console.log(e)
+                }.bind(this));
+		    
+		 this.el.addEventListener("touchend", function (e) {
+			 console.log(e)
+                }.bind(this));
+		    
+		
+                this.el.addEventListener("animation-finished", function (e) {
+			 console.log(e)
+                    let dk = document.querySelector("scene")
+		    dk.removeAttribute("animation-mixer");
+                }.bind(this));
+		
+            }
+        });
+    };
+</script>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene renderer="colorManagement: true">
+       <a-assets>
+        <a-asset-item id="dk" response-type="arraybuffer" src="./scene.glb"></a-asset-item>  
+      </a-assets>
+      <a-entity event-listener id="scene-model"  
+        gltf-model="#scene" 
+        scale="1 1 1" 
+        position = "0 0 0" 
+        rotation="0 0 0" 
+      >
+      </a-entity>
+      <a-entity cursor="rayOrigin:mouse"></a-entity>
+      <a-entity cursor="fuse: true; fuseTimeout: 500"></a-entity>
+    </a-scene>
+  </body>
+</html>
